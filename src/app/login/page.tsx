@@ -21,7 +21,7 @@ export default function LoginPage() {
       const user = await authService.login(username);
       setUser(user);
       router.push('/profile');
-    } catch (err) {
+    } catch {
       setError('Failed to login. Please try again.');
     } finally {
       setIsLoadingLocal(false);
@@ -53,7 +53,7 @@ export default function LoginPage() {
         </form>
         
         <div className="mt-6 text-center text-sm text-slate-400">
-          Don't have an account? <span className="text-indigo-400 hover:text-indigo-300 transition-colors cursor-pointer">Register (Mocked)</span>
+          Don&apos;t have an account? <span className="text-indigo-400 hover:text-indigo-300 transition-colors cursor-pointer">Register (Mocked)</span>
         </div>
       </div>
     </div>
