@@ -11,6 +11,15 @@ const config: Config = {
       colors: {
         background: "var(--background)",
         foreground: "var(--foreground)",
+        primary: {
+          DEFAULT: "var(--primary)",
+          hover: "var(--primary-hover)",
+          foreground: "var(--primary-foreground)",
+        },
+        card: "var(--card)",
+        "card-foreground": "var(--card-foreground)",
+        success: "var(--success)",
+        error: "var(--error)",
       },
     },
   },
