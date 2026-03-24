@@ -38,7 +38,7 @@ function GameContent() {
       resetGame();
       setMode(mode);
       setLoading(true);
-      const fetchedQuestions = await questionService.getQuestions(mode, 5);
+      const fetchedQuestions = await questionService.getQuestions(mode, 10);
       setQuestions(fetchedQuestions);
       setLoading(false);
     };
@@ -79,7 +79,7 @@ function GameContent() {
   };
 
   return (
-    <div className="flex-1 p-4 md:p-8 flex flex-col pt-12">
+    <div className="flex-1 p-4 md:p-8 flex flex-col pt-12 max-w-4xl mx-auto w-full">
       <ScoreBoard 
         score={score} 
         totalQuestions={questions.length} 
@@ -97,22 +97,22 @@ function GameContent() {
             const isCorrectOption = currentQuestion.correctAnswer === option;
             
             let btnVariant: 'primary' | 'secondary' | 'outline' = 'secondary';
-            let extraClasses = 'w-full text-left justify-start';
+            let extraClasses = 'w-full text-left justify-start text-lg h-auto py-4';
 
             if (showResult) {
               if (isCorrectOption) {
                 btnVariant = 'primary';
-                extraClasses += ' bg-emerald-600 hover:bg-emerald-700 text-white border-transparent';
+                extraClasses += ' bg-emerald-600 hover:bg-emerald-700 text-white border-emerald-500 shadow-[0_0_15px_rgba(16,185,129,0.2)]';
               } else if (isSelected && !isCorrectOption) {
                 btnVariant = 'primary';
-                extraClasses += ' bg-red-600 hover:bg-red-700 text-white border-transparent';
+                extraClasses += ' bg-red-600 hover:bg-red-700 text-white border-red-500 shadow-[0_0_15px_rgba(239,68,68,0.2)]';
               } else {
                  extraClasses += ' opacity-50';
               }
             } else if (isSelected) {
               btnVariant = 'primary';
             } else {
-               extraClasses += ' hover:bg-slate-700';
+               extraClasses += ' hover:bg-slate-700 hover:scale-[1.02] transition-transform';
             }
 
             return (

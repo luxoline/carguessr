@@ -19,6 +19,7 @@ export const GameCard: React.FC<GameCardProps> = ({ imageUrl, imageAlt, children
             className="object-cover"
             sizes="(max-width: 768px) 100vw, 768px"
             priority
+            unoptimized
           />
         ) : (
           <div className="absolute inset-0 flex items-center justify-center text-slate-500">
