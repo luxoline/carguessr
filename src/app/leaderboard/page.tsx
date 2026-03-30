@@ -1,13 +1,26 @@
-import React from 'react';
+'use client';
+import React, { useEffect, useState } from 'react';
+import { leaderboardService } from '@/services/leaderboardService';
+import { LeaderboardEntry } from '@/types';
 
 export default function LeaderboardPage() {
-  const players = [
-    { rank: 1, name: 'TurboRacer', score: 9500 },
-    { rank: 2, name: 'V8Lover', score: 8200 },
-    { rank: 3, name: 'DriftKing', score: 7800 },
-    { rank: 4, name: 'GearHead123', score: 6500 },
-    { rank: 5, name: 'SpeedyGonzales', score: 6100 },
-  ];
+  const [players, setPlayers] = useState<LeaderboardEntry[]>([]);
+  const [isLoading, setIsLoading] = useState(true);
+
+  useEffect(() => {
+    const fetchLeaderboard = async () => {
+      try {
+        const response = await leaderboardService.getLeaderboard(0, 10);
+        setPlayers(response.items || []);
+      } catch (error) {
+        console.error('Failed to fetch leaderboard:', error);
+      } finally {
+        setIsLoading(false);
+      }
+    };
+
+    fetchLeaderboard();
+  }, []);
 
   return (
     <div className="flex-1 p-4 md:p-8 max-w-3xl mx-auto w-full pt-12">
@@ -22,13 +35,23 @@ export default function LeaderboardPage() {
             </tr>
           </thead>
           <tbody className="divide-y divide-slate-800">
-            {players.map((p) => (
-              <tr key={p.rank} className="hover:bg-slate-800/30 transition-colors">
-                <td className="p-4 text-indigo-400 font-bold">#{p.rank}</td>
-                <td className="p-4 text-white font-medium">{p.name}</td>
-                <td className="p-4 text-emerald-400 font-bold text-right">{p.score}</td>
+            {isLoading ? (
+              <tr>
+                <td colSpan={3} className="p-8 text-center text-slate-400">Loading...</td>
               </tr>
-            ))}
+            ) : players.length === 0 ? (
+              <tr>
+                <td colSpan={3} className="p-8 text-center text-slate-400">No data available</td>
+              </tr>
+            ) : (
+              players.map((p, index) => (
+                <tr key={index} className="hover:bg-slate-800/30 transition-colors">
+                  <td className="p-4 text-indigo-400 font-bold">#{p.rank}</td>
+                  <td className="p-4 text-white font-medium">{p.userName}</td>
+                  <td className="p-4 text-emerald-400 font-bold text-right">{p.score}</td>
+                </tr>
+              ))
+            )}
           </tbody>
         </table>
       </div>

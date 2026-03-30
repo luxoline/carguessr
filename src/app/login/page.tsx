@@ -6,7 +6,8 @@ import { authService } from '@/services/authService';
 import { Button } from '@/components/ui/Button';
 
 export default function LoginPage() {
-  const [username, setUsername] = useState('SpeedDemon');
+  const [email, setEmail] = useState('');
+  const [password, setPassword] = useState('');
   const [error, setError] = useState<string | null>(null);
   const [isLoadingLocal, setIsLoadingLocal] = useState(false);
   
@@ -18,11 +19,11 @@ export default function LoginPage() {
     setIsLoadingLocal(true);
     setError(null);
     try {
-      const user = await authService.login(username);
+      const user = await authService.login({ email, password });
       setUser(user);
       router.push('/profile');
     } catch {
-      setError('Failed to login. Please try again.');
+      setError('Failed to login. Please check your credentials and try again.');
     } finally {
       setIsLoadingLocal(false);
     }
@@ -38,11 +39,21 @@ export default function LoginPage() {
         
         <form onSubmit={handleSubmit} className="space-y-4">
           <div>
-            <label className="block text-sm font-medium text-slate-400 mb-1">Username</label>
+            <label className="block text-sm font-medium text-slate-400 mb-1">Email</label>
             <input 
-              type="text" 
-              value={username}
-              onChange={(e) => setUsername(e.target.value)}
+              type="email" 
+              value={email}
+              onChange={(e) => setEmail(e.target.value)}
+              className="w-full bg-slate-800 border border-slate-700 rounded-lg px-4 py-3 text-white focus:outline-none focus:border-indigo-500 focus:ring-1 focus:ring-indigo-500 transition-colors"
+              required
+            />
+          </div>
+          <div>
+            <label className="block text-sm font-medium text-slate-400 mb-1">Password</label>
+            <input 
+              type="password" 
+              value={password}
+              onChange={(e) => setPassword(e.target.value)}
               className="w-full bg-slate-800 border border-slate-700 rounded-lg px-4 py-3 text-white focus:outline-none focus:border-indigo-500 focus:ring-1 focus:ring-indigo-500 transition-colors"
               required
             />
@@ -53,7 +64,7 @@ export default function LoginPage() {
         </form>
         
         <div className="mt-6 text-center text-sm text-slate-400">
-          Don&apos;t have an account? <span className="text-indigo-400 hover:text-indigo-300 transition-colors cursor-pointer">Register (Mocked)</span>
+          Don&apos;t have an account? <span className="text-indigo-400 hover:text-indigo-300 transition-colors cursor-pointer">Register (Not Implemented)</span>
         </div>
       </div>
     </div>

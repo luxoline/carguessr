@@ -32,10 +32,10 @@ export default function ProfilePage() {
       <div className="bg-slate-900 border border-slate-800 rounded-xl p-6 shadow-xl space-y-6">
         <div className="flex items-center gap-4 border-b border-slate-800 pb-6">
           <div className="w-20 h-20 bg-indigo-600 rounded-full flex items-center justify-center text-3xl font-bold text-white uppercase shadow-inner">
-            {user.username.charAt(0)}
+            {(user.userName || user.username || 'U').charAt(0)}
           </div>
           <div>
-            <h2 className="text-2xl font-bold text-white">{user.username}</h2>
+            <h2 className="text-2xl font-bold text-white">{user.userName || user.username}</h2>
             <p className="text-slate-400">ID: {user.id}</p>
           </div>
         </div>

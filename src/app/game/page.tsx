@@ -4,7 +4,7 @@ import React, { useEffect, useState, Suspense } from 'react';
 import { useSearchParams, useRouter } from 'next/navigation';
 import { useGameStore } from '@/store/gameStore';
 import { questionService } from '@/services/questionService';
-import { GameMode } from '@/types';
+import { GameMode, DifficultyLevel } from '@/types';
 import { GameCard } from '@/components/game/GameCard';
 import { ScoreBoard } from '@/components/game/ScoreBoard';
 import { Button } from '@/components/ui/Button';
@@ -38,7 +38,8 @@ function GameContent() {
       resetGame();
       setMode(mode);
       setLoading(true);
-      const fetchedQuestions = await questionService.getQuestions(mode, 10);
+      // Hardcoded 4 questions and Medium difficulty for now
+      const fetchedQuestions = await questionService.getQuestions(4, DifficultyLevel.Medium);
       setQuestions(fetchedQuestions);
       setLoading(false);
     };

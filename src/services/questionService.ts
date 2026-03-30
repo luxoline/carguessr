@@ -1,30 +1,23 @@
-import { GameMode, Question, Score } from "../types";
-import { MOCK_QUESTIONS } from "./mockData";
-
-const DELAY = 800; // Simulated latency
+import { Question, Score, DifficultyLevel } from "../types";
+import { api } from "./api";
 
 export const questionService = {
-  async getQuestions(mode: GameMode, limit: number = 4): Promise<Question[]> {
-    return new Promise((resolve) => {
-      setTimeout(() => {
-        // In a real app, mode might dictate complexity or different DB tables
-        // Here we just shuffle the mock questions and return up to `limit`
-        const shuffled = [...MOCK_QUESTIONS].sort(() => 0.5 - Math.random());
-        resolve(shuffled.slice(0, limit));
-      }, DELAY);
+  async getQuestions(examSize: number = 10, difficultyLevel: DifficultyLevel = DifficultyLevel.Medium): Promise<Question[]> {
+    return api.get<Question[]>("/Questions", { 
+        examSize, 
+        difficultyLevel 
     });
   },
 
   async submitScore(score: Pick<Score, "userId" | "score" | "mode">): Promise<{ success: boolean; newRank?: number }> {
+    // Note: Swagger didn't list a score submission endpoint. 
+    // Mocking this part until a backend endpoint is available.
     return new Promise((resolve) => {
-      setTimeout(() => {
-        // Mocking saving score
-        console.log("Score submitted:", score);
+        console.log("Score submitted (mocked):", score);
         resolve({
           success: true,
           newRank: score.mode === "competitive" ? Math.floor(Math.random() * 100) + 1 : undefined
         });
-      }, DELAY);
     });
   }
 };

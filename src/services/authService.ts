@@ -1,35 +1,32 @@
-import { User } from "../types";
-import { MOCK_USERS } from "./mockData";
-
-const DELAY = 600;
+import { User, LoginDto, RegisterDto, LoginResponse } from "../types";
+import { api, tokenManager } from "./api";
 
 export const authService = {
-  async login(username: string): Promise<User> {
-    return new Promise((resolve) => {
-      setTimeout(() => {
-        const user = Object.values(MOCK_USERS).find(u => u.username.toLowerCase() === username.toLowerCase());
-        if (user) {
-          resolve(user);
-        } else {
-          resolve({
-            id: `u${Date.now()}`,
-            username,
-            stats: { totalGames: 0, accuracy: 0, bestScore: 0 }
-          });
-        }
-      }, DELAY);
-    });
+  async login(data: LoginDto): Promise<User> {
+    const response = await api.post<LoginResponse>("/Users/login", data);
+    
+    // Server should return the token as accessToken
+    if (response.accessToken) {
+      tokenManager.setToken(response.accessToken);
+    }
+
+    // Attempt to fetch current user details if not fully populated in login response
+    if (response.user) {
+        return response.user;
+    }
+    
+    return this.getCurrentUser();
   },
   
-  async register(username: string): Promise<User> {
-    return new Promise((resolve) => {
-       setTimeout(() => {
-          resolve({
-            id: `u${Date.now()}`,
-            username,
-            stats: { totalGames: 0, accuracy: 0, bestScore: 0 }
-          });
-       }, DELAY);
-    });
+  async register(data: RegisterDto): Promise<void> {
+    await api.post<void>("/Users", data);
+  },
+
+  async getCurrentUser(): Promise<User> {
+      return api.get<User>("/Users/current-user");
+  },
+
+  logout(): void {
+      tokenManager.removeToken();
   }
 };
