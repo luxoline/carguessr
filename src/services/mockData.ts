@@ -140,10 +140,5 @@ export const MOCK_USERS: Record<string, User> = {
     id: "u1",
     userName: "SpeedDemon",
     username: "SpeedDemon",
-    stats: {
-      totalGames: 42,
-      accuracy: 85,
-      bestScore: 2400
-    }
   }
 };
