@@ -8,11 +8,18 @@ export enum DifficultyLevel {
   Hard = 2,
 }
 
+export interface AnswerOption {
+  id: number;
+  content: string;
+}
+
 export interface Question {
-  id: string;
-  imageUrl: string;
-  options: string[];
-  correctAnswer: string;
+  id: number;
+  title: string;
+  photo: string;
+  trueAnswerId: number;
+  carPart: number;
+  options: AnswerOption[];
 }
 
 // ── Auth DTOs ───────────────────────────────────────────
@@ -37,17 +44,14 @@ export interface LoginResponse {
 // ── User Types ──────────────────────────────────────────
 
 export interface User {
-  id: string;
+  id: string | number;
   userName: string;
   username?: string; // backward compat alias
   email?: string;
   profilePhoto?: string;
   avatarUrl?: string;
-  stats?: {
-    totalGames: number;
-    accuracy: number;
-    bestScore: number;
-  };
+  totalPoint?: number;
+  gameMoney?: number;
 }
 
 // ── Leaderboard ─────────────────────────────────────────
@@ -78,4 +82,22 @@ export interface Score {
   score: number;
   mode: GameMode;
   date: string;
+}
+
+// ── Game Session DTOs (Swagger) ──────────────────────────
+
+export interface StartGameDto {
+  questionLimit: number;
+  timeForEveryQuestion: number;
+  difficultyLevel: DifficultyLevel;
+}
+
+export interface EndGameDto {
+  guid: string;       // game session UUID returned from start-game-session
+  totalScore: number;
+}
+
+export interface GameSessionResponse {
+  sessionGuid: string;
+  questions: Question[];
 }

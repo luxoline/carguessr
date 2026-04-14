@@ -4,70 +4,141 @@ const IMAGE_URL = "https://pub-0cf35cbdfe76406f89de7948c6fcee26.r2.dev/Gemini_Ge
 
 export const MOCK_QUESTIONS: Question[] = [
   {
-    id: "q1",
-    imageUrl: IMAGE_URL,
-    options: ["BMW 3 Series", "Toyota Corolla", "Ford Focus", "Honda Civic"],
-    correctAnswer: "BMW 3 Series"
+    id: 1,
+    title: "Guess the car",
+    photo: IMAGE_URL,
+    trueAnswerId: 1,
+    carPart: 1,
+    options: [
+      { id: 1, content: "BMW 3 Series" },
+      { id: 2, content: "Toyota Corolla" },
+      { id: 3, content: "Ford Focus" },
+      { id: 4, content: "Honda Civic" }
+    ]
   },
   {
-    id: "q2",
-    imageUrl: IMAGE_URL,
-    options: ["Porsche 911", "Ferrari 488", "Lamborghini Huracan", "McLaren 720S"],
-    correctAnswer: "Porsche 911"
+    id: 2,
+    title: "Guess the car",
+    photo: IMAGE_URL,
+    trueAnswerId: 5,
+    carPart: 1,
+    options: [
+      { id: 5, content: "Porsche 911" },
+      { id: 6, content: "Ferrari 488" },
+      { id: 7, content: "Lamborghini Huracan" },
+      { id: 8, content: "McLaren 720S" }
+    ]
   },
   {
-    id: "q3",
-    imageUrl: IMAGE_URL,
-    options: ["BMW M4", "Audi RS5", "Mercedes AMG C63", "Lexus RC F"],
-    correctAnswer: "BMW M4"
+    id: 3,
+    title: "Guess the car",
+    photo: IMAGE_URL,
+    trueAnswerId: 9,
+    carPart: 1,
+    options: [
+      { id: 9, content: "BMW M4" },
+      { id: 10, content: "Audi RS5" },
+      { id: 11, content: "Mercedes AMG C63" },
+      { id: 12, content: "Lexus RC F" }
+    ]
   },
   {
-    id: "q4",
-    imageUrl: IMAGE_URL,
-    options: ["Ford Mustang", "Chevrolet Camaro", "Dodge Challenger", "Nissan GT-R"],
-    correctAnswer: "Ford Mustang"
+    id: 4,
+    title: "Guess the car",
+    photo: IMAGE_URL,
+    trueAnswerId: 13,
+    carPart: 1,
+    options: [
+      { id: 13, content: "Ford Mustang" },
+      { id: 14, content: "Chevrolet Camaro" },
+      { id: 15, content: "Dodge Challenger" },
+      { id: 16, content: "Nissan GT-R" }
+    ]
   },
   {
-    id: "q5",
-    imageUrl: IMAGE_URL,
-    options: ["Tesla Model S", "Porsche Taycan", "Lucid Air", "Audi e-tron GT"],
-    correctAnswer: "Porsche Taycan"
+    id: 5,
+    title: "Guess the car",
+    photo: IMAGE_URL,
+    trueAnswerId: 17,
+    carPart: 1,
+    options: [
+      { id: 17, content: "Tesla Model S" },
+      { id: 18, content: "Porsche Taycan" },
+      { id: 19, content: "Lucid Air" },
+      { id: 20, content: "Audi e-tron GT" }
+    ]
   },
   {
-    id: "q6",
-    imageUrl: IMAGE_URL,
-    options: ["Honda NSX", "Acura Integra", "Toyota Supra", "Mazda RX-7"],
-    correctAnswer: "Toyota Supra"
+    id: 6,
+    title: "Guess the car",
+    photo: IMAGE_URL,
+    trueAnswerId: 21,
+    carPart: 1,
+    options: [
+      { id: 21, content: "Honda NSX" },
+      { id: 22, content: "Acura Integra" },
+      { id: 23, content: "Toyota Supra" },
+      { id: 24, content: "Mazda RX-7" }
+    ]
   },
   {
-    id: "q7",
-    imageUrl: IMAGE_URL,
-    options: ["Volkswagen Golf GTI", "Renault Megane RS", "Honda Civic Type R", "Hyundai i30 N"],
-    correctAnswer: "Volkswagen Golf GTI"
+    id: 7,
+    title: "Guess the car",
+    photo: IMAGE_URL,
+    trueAnswerId: 25,
+    carPart: 1,
+    options: [
+      { id: 25, content: "Volkswagen Golf GTI" },
+      { id: 26, content: "Renault Megane RS" },
+      { id: 27, content: "Honda Civic Type R" },
+      { id: 28, content: "Hyundai i30 N" }
+    ]
   },
   {
-    id: "q8",
-    imageUrl: IMAGE_URL,
-    options: ["Subaru WRX STI", "Mitsubishi Lancer Evo", "Ford Focus RS", "Audi S3"],
-    correctAnswer: "Subaru WRX STI"
+    id: 8,
+    title: "Guess the car",
+    photo: IMAGE_URL,
+    trueAnswerId: 29,
+    carPart: 1,
+    options: [
+      { id: 29, content: "Subaru WRX STI" },
+      { id: 30, content: "Mitsubishi Lancer Evo" },
+      { id: 31, content: "Ford Focus RS" },
+      { id: 32, content: "Audi S3" }
+    ]
   },
   {
-    id: "q9",
-    imageUrl: IMAGE_URL,
-    options: ["Aston Martin Vantage", "Jaguar F-Type", "Bentley Continental GT", "Maserati GranTurismo"],
-    correctAnswer: "Jaguar F-Type"
+    id: 9,
+    title: "Guess the car",
+    photo: IMAGE_URL,
+    trueAnswerId: 33,
+    carPart: 1,
+    options: [
+      { id: 33, content: "Aston Martin Vantage" },
+      { id: 34, content: "Jaguar F-Type" },
+      { id: 35, content: "Bentley Continental GT" },
+      { id: 36, content: "Maserati GranTurismo" }
+    ]
   },
   {
-    id: "q10",
-    imageUrl: IMAGE_URL,
-    options: ["Chevrolet Corvette", "Dodge Viper", "Ford GT", "Saleen S7"],
-    correctAnswer: "Chevrolet Corvette"
+    id: 10,
+    title: "Guess the car",
+    photo: IMAGE_URL,
+    trueAnswerId: 37,
+    carPart: 1,
+    options: [
+      { id: 37, content: "Chevrolet Corvette" },
+      { id: 38, content: "Dodge Viper" },
+      { id: 39, content: "Ford GT" },
+      { id: 40, content: "Saleen S7" }
+    ]
   }
 ];
 
 export const MOCK_USERS: Record<string, User> = {
   "u1": {
     id: "u1",
+    userName: "SpeedDemon",
     username: "SpeedDemon",
     stats: {
       totalGames: 42,

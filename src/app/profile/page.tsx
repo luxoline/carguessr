@@ -3,10 +3,21 @@ import React from 'react';
 import { useUserStore } from '@/store/userStore';
 import { Button } from '@/components/ui/Button';
 import { useRouter } from 'next/navigation';
+import { authService } from '@/services/authService';
 
 export default function ProfilePage() {
-  const { user, isLoggedIn, logout } = useUserStore();
+  const { user, isLoggedIn, logout, setUser } = useUserStore();
   const router = useRouter();
+  const hasFetchedRef = React.useRef(false);
+
+  React.useEffect(() => {
+    if (isLoggedIn && !hasFetchedRef.current) {
+      hasFetchedRef.current = true;
+      authService.getCurrentUser().then((freshUser) => {
+        setUser(freshUser);
+      }).catch(err => console.error("Failed to fetch fresh user data", err));
+    }
+  }, [isLoggedIn, setUser]);
 
   if (!isLoggedIn || !user) {
     return (
@@ -42,12 +53,12 @@ export default function ProfilePage() {
         
         <div className="grid grid-cols-2 gap-4">
           <div className="bg-slate-800 p-4 rounded-lg text-center shadow-inner">
-            <div className="text-xs text-slate-400 uppercase tracking-wider font-semibold mb-1">Games Played</div>
-            <div className="text-3xl font-bold text-indigo-400">{user.stats?.totalGames || 0}</div>
+            <div className="text-xs text-slate-400 uppercase tracking-wider font-semibold mb-1">Total Score</div>
+            <div className="text-3xl font-bold text-indigo-400">{user.totalPoint || 0}</div>
           </div>
           <div className="bg-slate-800 p-4 rounded-lg text-center shadow-inner">
-            <div className="text-xs text-slate-400 uppercase tracking-wider font-semibold mb-1">High Score</div>
-            <div className="text-3xl font-bold text-emerald-400">{user.stats?.bestScore || 0}</div>
+            <div className="text-xs text-slate-400 uppercase tracking-wider font-semibold mb-1">Game Money</div>
+            <div className="text-3xl font-bold text-emerald-400">{user.gameMoney || 0}</div>
           </div>
         </div>
       </div>

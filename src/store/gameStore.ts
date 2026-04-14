@@ -5,17 +5,19 @@ export interface GameState {
   mode: GameMode | null;
   questions: Question[];
   currentQuestionIndex: number;
-  selectedAnswer: string | null;
+  selectedAnswer: number | null;
   score: number;
   isGameOver: boolean;
   isLoading: boolean;
-  
+  sessionGuid: string | null;
+
   setMode: (mode: GameMode) => void;
   setQuestions: (questions: Question[]) => void;
-  selectAnswer: (answer: string) => void;
+  selectAnswer: (answerId: number) => void;
   nextQuestion: () => void;
   resetGame: () => void;
   setLoading: (loading: boolean) => void;
+  setSessionGuid: (guid: string | null) => void;
 }
 
 export const useGameStore = create<GameState>((set) => ({
@@ -26,17 +28,18 @@ export const useGameStore = create<GameState>((set) => ({
   score: 0,
   isGameOver: false,
   isLoading: false,
+  sessionGuid: null,
 
   setMode: (mode) => set({ mode }),
   setQuestions: (questions) => set({ questions, currentQuestionIndex: 0, score: 0, isGameOver: false, selectedAnswer: null }),
-  selectAnswer: (answer) => set((state) => {
-    if (state.selectedAnswer !== null) return state; // Prevent re-answering
+  selectAnswer: (answerId) => set((state) => {
+    if (state.selectedAnswer !== null) return state;
     const currentQ = state.questions[state.currentQuestionIndex];
     if (!currentQ) return state;
-    
-    const isCorrect = answer === currentQ.correctAnswer;
+
+    const isCorrect = answerId === currentQ.trueAnswerId;
     return {
-      selectedAnswer: answer,
+      selectedAnswer: answerId,
       score: isCorrect ? state.score + 100 : state.score
     };
   }),
@@ -57,6 +60,9 @@ export const useGameStore = create<GameState>((set) => ({
     selectedAnswer: null,
     score: 0,
     isGameOver: false,
+    sessionGuid: null,
   }),
-  setLoading: (isLoading) => set({ isLoading })
+  setLoading: (isLoading) => set({ isLoading }),
+  setSessionGuid: (guid) => set({ sessionGuid: guid }),
 }));
+
