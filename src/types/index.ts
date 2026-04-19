@@ -59,7 +59,7 @@ export interface User {
 export interface LeaderboardEntry {
   rank: number;
   userName: string;
-  score: number;
+  totalScored: number;
   profilePhoto?: string;
 }
 

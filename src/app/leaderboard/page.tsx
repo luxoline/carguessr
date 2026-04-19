@@ -48,7 +48,7 @@ export default function LeaderboardPage() {
                 <tr key={index} className="hover:bg-slate-800/30 transition-colors">
                   <td className="p-4 text-indigo-400 font-bold">#{p.rank}</td>
                   <td className="p-4 text-white font-medium">{p.userName}</td>
-                  <td className="p-4 text-emerald-400 font-bold text-right">{p.score}</td>
+                  <td className="p-4 text-emerald-400 font-bold text-right">{p.totalScored}</td>
                 </tr>
               ))
             )}

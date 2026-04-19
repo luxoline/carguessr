@@ -47,7 +47,7 @@ function GameContent() {
       try {
         // start-game-session → GUID ve soruları al
         const sessionResponse = await questionService.startGameSession({
-          questionLimit: 4,
+          questionLimit: 1,
           timeForEveryQuestion: 30,
           difficultyLevel: DifficultyLevel.Medium,
         });
